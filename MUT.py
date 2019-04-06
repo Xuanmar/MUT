@@ -25,21 +25,7 @@ for w in word:
 alpha.append("#")
 list_trans = config.conf(list_trans)
 
-
-def _main_(word, NUM_STATE_ALPHA_INIT_STATE, list_trans, alpha):
-  state = NUM_STATE_ALPHA_INIT_STATE[2]
-  index = len(word)-1
-  lista_config = []
-  while(state != "h"):
-    word_old = config.render(word, index)
-    lista_config.append( str(word_old) )
-    state, act = utils._init_(state, list_trans, word, index)
-    word, index = utils._accion(act, word, index, alpha)
-    word = utils._check_sharp(word)
-  return lista_config 
-    
-
-word_end =  _main_(word, NUM_STATE_ALPHA_INIT_STATE, list_trans, alpha)
+word_end =  config._main_(word, NUM_STATE_ALPHA_INIT_STATE, list_trans, alpha)
 
 
 strit = iter(word_end)
