@@ -40,10 +40,10 @@ def _move(index, mov, word):
   else:
     return False 
 
-def _write(worb, simbol, index):
-  if index >= 0 and index <= len(worb):
-    worb[index] = simbol
-    return worb
+def _write(word, simbol, index):
+  if index >= 0 and index <= len(word):
+    word[index] = simbol
+    return word
   else: return False
 
 def _accion(act, word, index, alpha):
@@ -60,10 +60,11 @@ def _check_sharp(word):
     word.append("#")
     return word
 
-def _init_(state, list_trans, worb, index):
+def _init_(state, list_trans, word, index):
   for tr in list_trans:
     if tr[0] == state:
-      if tr[1] == worb[index]:
+      if tr[1] == word[index]:
         next_state = tr[-2]
         act = tr[-1]
-  return next_state, act
+        read = word[index]
+  return next_state, act, read

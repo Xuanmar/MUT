@@ -24,22 +24,25 @@ for w in word:
 
 alpha.append("#")
 list_trans = config.conf(list_trans)
+word_end, lista_step =  config._main_(word, NUM_STATE_ALPHA_INIT_STATE, list_trans, alpha)
+lista_final = config._dictionary_(word_end, lista_step)
 
-word_end =  config._main_(word, NUM_STATE_ALPHA_INIT_STATE, list_trans, alpha)
-
-
-strit = iter(word_end)
-word_init = tk.Label(root, text=("Palabra Orginal: \n" + wl), font=("Helvetica", 16) )
-label = tk.Label(root, text=next(strit), font=("Helvetica", 20), width=(50), height=(15), fg = "green")
+strit = iter(lista_final)
+_step_s = iter(lista_step)
+word_init = tk.Label(root, text=("Palabra Orginal: \n" + wl), font=("Helvetica", 16), fg="gray" )
+label = tk.Label(root, text=next(strit, _step_s), font=("italic", 20), width=(50), height=(15), fg = "green")
 word_init.pack()
 label.pack()
 
+
+
+
 def refresh():
     try:
-        label['text'] = next(strit)
-        root.after(500, refresh)
+        label['text'] =  next(strit)
+        root.after(400, refresh)
     except StopIteration:
         root.after(100000, root.destroy)
 
-root.after(500, refresh)
+root.after(400, refresh)
 root.mainloop()
