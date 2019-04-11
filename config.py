@@ -52,6 +52,8 @@ def _main_(word, NUM_STATE_ALPHA_INIT_STATE, list_trans, alpha):
   act = ""
   next_state = state
   read = ""
+  list_steps = []
+  step_number = 0
   while(state != "h"):
     word_old = render(word, index)
     lista_config.append( str(word_old) )
@@ -60,14 +62,16 @@ def _main_(word, NUM_STATE_ALPHA_INIT_STATE, list_trans, alpha):
     state = next_state
     word, index = utils._accion(act, word, index, alpha)
     word = utils._check_sharp(word)
+    step_number = step_number + 1
+    list_steps.append(str(step_number))
 
-  return lista_config, lista_step 
+  return lista_config, lista_step, list_steps 
 
-def _dictionary_(word, step):
+def _dictionary_(word, step, num_step):
   lista_f = []
   index = 0
   for w in word:
-    d = "-----------------------------------------------------------------------------------\n" + w + "\n-----------------------------------------------------------------------------------\n " + step[index]
+    d = "-----------------------------------------------------------------------------------\n" + w + "\n-----------------------------------------------------------------------------------\n " + step[index] + "\n Pasos: " + num_step[index]
     lista_f.append(str(d))
     index = index+1
   return lista_f

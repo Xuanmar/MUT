@@ -9,7 +9,7 @@ import tkinter as tk
 root = tk.Tk() #creamos la ventana
 root.title("MUT (ww^r)")
 root.resizable(0,0)
-root.geometry("800x200")
+root.geometry("800x250")
 mov = ["R", "L"]
 
 parser = argparse.ArgumentParser()
@@ -25,8 +25,8 @@ if entry != False and len(entry) == 4:
   if config._check_line_1(NUM_STATE_ALPHA_INIT_STATE):
     if config._check_ins(list_trans, NUM_STATE_ALPHA_INIT_STATE[0], alpha, mov) and config._check_word(word,alpha):
       wl = config.origin_W(word)
-      word_end, lista_step =  config._main_(word, NUM_STATE_ALPHA_INIT_STATE, list_trans, alpha)
-      lista_final = config._dictionary_(word_end, lista_step)
+      word_end, lista_step, num_steps =  config._main_(word, NUM_STATE_ALPHA_INIT_STATE, list_trans, alpha)
+      lista_final = config._dictionary_(word_end, lista_step, num_steps)
       strit = iter(lista_final)
       _step_s = iter(lista_step)
       word_init = tk.Label(root, text=("Palabra Orginal: \n" + wl), font=("Helvetica", 16), fg="gray" )
