@@ -22,7 +22,7 @@ def render(word, index):
   word_aux = word.copy()
   word_aux.insert(index, "[")
   word_aux.insert(index + 2, "]")
-  voidc = ''
+  voidc = ""
   for letter in word_aux:
     voidc = voidc + ''.join(letter)
   return str(voidc)
@@ -49,6 +49,9 @@ def _main_(word, NUM_STATE_ALPHA_INIT_STATE, list_trans, alpha):
   index = len(word)-1
   lista_config = []
   lista_step = []
+  act = ""
+  next_state = state
+  read = ""
   while(state != "h"):
     word_old = render(word, index)
     lista_config.append( str(word_old) )
@@ -64,9 +67,63 @@ def _dictionary_(word, step):
   lista_f = []
   index = 0
   for w in word:
-    d = w + "\n\n " + step[index]
+    d = "-----------------------------------------------------------------------------------\n" + w + "\n-----------------------------------------------------------------------------------\n " + step[index]
     lista_f.append(str(d))
     index = index+1
   return lista_f
 
+def _check_ins(Ins, num_state, alpha, Mov):
+  val = True
+  for _in  in Ins:
+    if _in[0].isnumeric() and int(_in[0]) < (int(num_state)-1):
+      val = True
+    else:
+      val = False
+      break
+    
+    if ( (str(_in[1]).isalpha()  or _in[1] == "#")  and len(_in[1]) == 1) and _in[1] in alpha:
+      val = True
+    else:
+      val = False
+      break
+    if (_in[2].isnumeric() and int(_in[2]) < (int(num_state)-1)) or (_in[2] == "h") :
+      val = True
+    else:
+      val = False
+      break
+    if ( _in[3] in alpha or _in[3] in Mov)  and len(_in[3]) == 1:
+      val = True
+    else:
+      val = False
+      break
+  return val
 
+def _check_word(word, alpha):
+  val = True
+  for w in word:
+    if w in alpha:
+      val = True
+    else:
+      val = False
+      break
+  return val
+
+def _check_line_1(NUM_STATE_ALPHA_INIT_STATE):
+  val  = True
+  if len(NUM_STATE_ALPHA_INIT_STATE) == 3:
+    for num in NUM_STATE_ALPHA_INIT_STATE:
+      if num.isnumeric():
+        val = True
+      else:
+        val = False
+        break
+  else:
+    val = False
+  return val
+
+def origin_W(word):
+  wl = ''
+  for w in word:
+    wl = wl + ''.join(w)
+  return wl
+    

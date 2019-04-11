@@ -1,4 +1,4 @@
 12 2 0
 a b
 0#1L 1a2# 2#3R 3#4a 3a3R 3b3R 4#5a 4b4L 4a4L 5a1L 1b6# 6#7R 7#8b 7a7R 7b7R 8#9b 8a8L 8b8L 9b1L 1#10R 10#h# 10a10R 10b10R
-#aabb#
+#aaba#

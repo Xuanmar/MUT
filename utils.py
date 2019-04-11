@@ -1,10 +1,13 @@
 def _read_line(args):
   entry = []
   line = args.file.readline()
-  while line != "":
-    entry.append(line)
-    line = args.file.readline()
-  return entry
+  if line != "":
+    while line != "":
+      entry.append(line)
+      line = args.file.readline()
+    return entry
+  else:
+    return False
 
 
 def transitions(entry):
@@ -61,6 +64,9 @@ def _check_sharp(word):
     return word
 
 def _init_(state, list_trans, word, index):
+  next_state = state
+  act = ""
+  read = ""
   for tr in list_trans:
     if tr[0] == state:
       if tr[1] == word[index]:
@@ -68,3 +74,4 @@ def _init_(state, list_trans, word, index):
         act = tr[-1]
         read = word[index]
   return next_state, act, read
+
